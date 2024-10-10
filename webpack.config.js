@@ -13,11 +13,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'lib'),
     filename: 'index.js',
-    library: {
-      name: 'SuperFlow',
-      type: 'var',
-      export: 'default'
-    },
+    library: 'SuperFlow',
     libraryTarget: 'umd'
   },
   resolve: {
