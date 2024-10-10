@@ -1,31 +1,55 @@
 /*
  * User: CHT
- * Date: 2024/7/30
- * Time: 下午6:02
- **/
+ * Date: 2024/10/8
+ * Time: 17:51
+**/
+export type Coordinate = [ number, number ]
+export type EventCallback = (event: DispatchEvent<any>) => boolean | void
 
-import SuperNode from './super-node'
-import SuperLine from './super-line'
-
-export default class SuperFlow {
-  public nodeList: SuperNode[] = []
-  public lineList: SuperLine[] = []
-  public origin: Coordinate = [ 0, 0 ]
-  public nodeMap: Map<string, SuperNode> = new Map()
-
-  constructor(options: FlowOptions) {
-    this.setOptions(options)
-  }
-
-  setOptions(options: FlowOptions) {
-    const {nodeList = [], lineList = []} = options
-    this.nodeMap.clear()
-    this.origin = options.origin || [ 0, 0 ]
-    this.nodeList = nodeList.map<SuperNode>(info => {
-      const node = new SuperNode(info, this)
-      this.nodeMap.set(node.id, node)
-      return node
-    })
-    this.lineList = lineList.map<SuperLine>(info => new SuperLine(info, this))
-  }
+export interface DispatchEvent<K extends keyof DocumentEventMap> {
+  type: string
+  evt: DocumentEventMap[K]
+  target?: any
 }
+
+export interface LinkItem {
+  startAt: Coordinate
+  endAt: Coordinate
+  meta?: any
+
+  [ key: string ]: any
+}
+
+export interface LinkPointList {
+  pointList: Coordinate[]
+  xList: number[]
+  yList: number[]
+  minX: number
+  maxX: number
+  minY: number
+  maxY: number
+}
+
+export interface NodeItem {
+  width: number
+  height: number
+  coordinate: Coordinate
+  meta?: any
+
+  [ key: string ]: any
+}
+
+export interface GraphOptions {
+  relationMark?: string
+  startMark?: string
+  endMark?: string
+  nodeList: NodeItem[]
+  linkList: LinkItem[]
+  origin: Coordinate
+}
+
+export { vector } from './vector'
+export { GraphEvent } from './graph-event'
+export { GraphLinkOptions, GraphLink } from './graph-link'
+export { GraphNode } from './graph-node'
+export { SuperFlow, SuperFlow as default } from './super-flow'

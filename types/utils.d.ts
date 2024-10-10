@@ -1,0 +1,13 @@
+import { Coordinate } from './index';
+export declare const direction: Record<'top' | 'right' | 'bottom' | 'left', number>;
+export declare const directionVector: Record<number, Coordinate>;
+export declare function uuid(before?: string, after?: string): string;
+export declare function getOffset(evt: MouseEvent, target?: Element | null): number[];
+export declare function toRawType(val: unknown): string;
+export declare function isFun(val: unknown): val is Function;
+export declare function isBool(val: unknown): val is boolean;
+export declare function isUndef(val: unknown): val is undefined;
+export declare function isString(val: unknown): val is string;
+export declare function isObject(val: unknown): val is object;
+export declare function arrayReplace(arr1: any[], arr2: any[]): void;
+export declare function debounce(fn: (...args: any) => any, timestamp: number): () => void;
